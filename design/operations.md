@@ -73,13 +73,24 @@ preference is about *agent-driven* work — Ingest, Query, Lint — not that sea
 6. Update the relevant **category catalog(s)** (`wiki/<category>/_index.md`) and
    `wiki/sources/_index.md`. Touch the root [`../wiki/index.md`](../wiki/index.md)
    **only** if a hub page, the scope, or an open thread changed — keep the root tiny.
-7. Append a summary line to [`../wiki/update-log.md`](../wiki/update-log.md).
+7. Append to [`../wiki/update-log.md`](../wiki/update-log.md): a routine `INGEST` line,
+   **plus** a `REVISE` line for each piece of existing knowledge this source changed or
+   retired (formats in that file's header). Additions that overturn nothing stay `INGEST`
+   only — that split is what keeps meaningful change easy to track.
 
 > **Concept-promotion rule:** a concept that appears in only **one** source is a
 > *claim*, not yet a concept — record it on the relevant page, but don't give it its
 > own `concepts/` page. Promote it to its own page on its **second independent
 > appearance**. This is what keeps the concept layer durable instead of a graveyard
 > of orphan singletons.
+
+> **Supersession rule:** when a source *changes or retires existing knowledge* (not just
+> adds new), edit the claim in place — never leave a stale value in a body or a
+> `> [!summary]` — add a dated line to the affected page's capped `## History` ledger,
+> and log it as a **`REVISE`** event, not a plain `INGEST`, so meaningful change stays
+> greppable apart from routine activity. For a wholly-replaced page, set
+> `status: superseded` + `superseded_by:` and redirect its summary. Full protocol:
+> [`structure.md`](structure.md) → Superseded knowledge & revision history.
 
 > **Cadence:** default to **one source at a time** with the human in the loop
 > (read summaries, check updates, steer emphasis). Switch to **batch ingest** with
@@ -102,6 +113,9 @@ preference is about *agent-driven* work — Ingest, Query, Lint — not that sea
 Report and, where possible, fix:
 - **Contradictions** between pages.
 - **Stale claims** a newer source has superseded.
+- **Supersession hygiene** — `## History` ledgers over their cap that weren't folded to
+  shards; `status: superseded` pages still drawing inbound links (redirect unfinished) or
+  now orphaned (safe to delete); claims still citing a source a later `REVISE` retired.
 - **Stale stubs** — `status: stub` / low-confidence pages left untouched, or that now
   have enough sources to mature.
 - **Orphans** — pages with no inbound links.

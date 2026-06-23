@@ -12,9 +12,17 @@ go here (see [`design/design-change-log.md`](../design/design-change-log.md)).
   Never load all shards at once.
 
 Entry formats (one line each). The consistent `- [YYYY-MM-DD] TYPE` prefix keeps the
-log parseable with plain unix tools (e.g. `grep "^- \[" update-log.md | head -5`):
+log parseable with plain unix tools (e.g. `grep "^- \[" update-log.md | head -5`, or
+`grep "REVISE"` to see only meaningful knowledge changes):
 `- [YYYY-MM-DD] INGEST | src-XXXX "title" — created/updated N pages — [detail](update-log/YYYY-MM.md#anchor)`
 `- [YYYY-MM-DD] QUERY | "question" — answered; promoted [[page]] (or: not promoted) — [detail](update-log/YYYY-MM.md#anchor)`
+`- [YYYY-MM-DD] REVISE | [[page]] <changed: X → Y> — src-XXXX supersedes src-YYYY (or: claim retired) — [detail](update-log/YYYY-MM.md#anchor)`
+
+Use `INGEST` for routine additions; use `REVISE` **only** when a source changes or
+retires knowledge already in the wiki. That split is what keeps meaningful change easy to
+track (`grep "REVISE"`) instead of buried in routine activity. Each `REVISE` line mirrors
+a line in the affected page's `## History` ledger (see [`design/structure.md`](../design/structure.md)
+→ Superseded knowledge & revision history).
 
 ---
 

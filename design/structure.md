@@ -97,12 +97,13 @@ Every knowledge page is markdown with YAML frontmatter:
 ---
 title: Human-readable title
 type: entity | concept | comparison | synthesis
-status: stub | draft | stable          # maturity of the page
+status: stub | draft | stable | superseded   # maturity (superseded = replaced; see below)
 confidence: low | medium | high        # how settled the claims are
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 sources: [src-0001, src-0007]          # backlinks → sources this page draws on
 related: [other-page-slug, ...]        # outbound links to sibling pages
+superseded_by: new-page-slug           # optional — present only when status: superseded
 ---
 
 # Title
@@ -137,6 +138,50 @@ Link every wiki reference: [[backpropagation]].
 - `concepts/` — one idea, topic, method, abstraction.
 - `comparisons/` — contrast 2+ entities/concepts.
 - `synthesis/` — essays promoted from queries answering recurring questions.
+
+---
+
+## Superseded knowledge & revision history
+
+Knowledge changes — guidelines get revised, standards move, claims get overturned. These
+rules keep pages **current** without losing the trail and without growing without bound.
+
+**A page states current truth only.** When a source changes a value, *edit the claim in
+place* — the old wording leaves the body and the `> [!summary]`. A reader must never act
+on a stale value, so the summary always reads as the latest.
+
+**The change is a first-class, greppable event.** Append a `REVISE` line to
+[`../wiki/update-log.md`](../wiki/update-log.md) — its own entry type, distinct from
+routine `INGEST` (see that file's header) — so "what meaningfully changed" is one
+`grep "REVISE"` away from ordinary activity. Additions that overturn nothing stay `INGEST`.
+
+**Topics that change over time carry an on-page ledger.** For pages whose value evolves
+(standards, guidelines, recommended figures), add a capped `## History` section —
+newest first, one dated, cited line per change:
+
+````markdown
+## History
+<!-- newest first · hard cap 5 lines · older folds to update-log/YYYY-MM.md -->
+- [2026-06] Recommended dose lowered 10 → 5 — new trial evidence [src-0009]
+- [2024-01] Dose set at 10 [src-0003]
+````
+
+When a 6th line lands, fold the **oldest** into the current month's content-log shard
+`update-log/YYYY-MM.md` (under a `#<page-slug>` anchor) and keep a pointer line on the
+page: `Earlier changes → update-log shards`. This is the same progressive-disclosure
+roll-off the logs use, so the full history stays **in content** (recent tail on the page,
+older in dated shards — all markdown, Obsidian-browsable) while no single file grows
+unbounded. Each `## History` line mirrors a `REVISE` log line, so meaningful change is
+trackable **by topic** (open the page) or **globally** (grep the log).
+
+**Whole-page supersession.** When a page is wholly replaced or split (not just one value
+revised), don't delete it blindly:
+- set `status: superseded` and `superseded_by: <new-page-slug>` in frontmatter;
+- rewrite its `> [!summary]` to a one-line redirect: `⚠️ Superseded by [[new-page]]. See there.`
+
+Query reads summaries first and follows links, so it self-redirects and never serves the
+stale body. Once nothing links in and the content lives in git + shards, Lint may flag the
+page for deletion. Sources may carry `superseded_by:` too (e.g. a v2 paper replaces v1).
 
 ---
 
