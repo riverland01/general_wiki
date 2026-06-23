@@ -59,8 +59,8 @@ chart, or a canvas when that serves the user better. Not every answer is a page.
 ### 4. File durable answers back (so explorations compound)
 If the answer is durably useful (a comparison, an analysis, a discovered connection),
 **file it back** rather than letting it vanish into chat: create or extend a page under
-`wiki/synthesis/` (template at
-[`wiki/synthesis/_template.md`](../../../wiki/synthesis/_template.md)) with a
+`wiki/synthesis/` (skeleton at
+[`design/templates/synthesis.md`](../../../design/templates/synthesis.md)) with a
 `> [!summary]` callout, `status`/`confidence`, citations, and bidirectional backlinks.
 Then refresh the affected `_index.md` line(s) and append a
 `- [YYYY-MM-DD] QUERY | …` entry to

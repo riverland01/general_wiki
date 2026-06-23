@@ -13,8 +13,8 @@ related: []           # supporting pages
 
 > [!summary]
 > One- or two-paragraph answer (the takeaway), written for the next agent. Litmus: if
-> the reader stopped here, would they have the answer? Promoted from a Query in
-> [`update-log.md`](../update-log.md).
+> the reader stopped here, would they have the answer? Promoted from a Query (logged in
+> `wiki/update-log.md`).
 
 ## Reasoning
 The synthesized argument, drawing across multiple sources and pages,

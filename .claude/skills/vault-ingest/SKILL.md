@@ -46,7 +46,7 @@ wiki/update-log.md             # append a one-line entry per ingest
 ### 1. Place the original & open a source note
 - Assign the next `src-XXXX` id (scan existing `wiki/sources/` for the highest).
 - Put the original file in `wiki/raw/` **under its own name — do not rename it**.
-- Create `wiki/sources/src-XXXX.md` from [`wiki/sources/_template.md`](../../../wiki/sources/_template.md):
+- Create `wiki/sources/src-XXXX.md` from [`design/templates/source.md`](../../../design/templates/source.md):
   fill frontmatter (`id, title, author, url, date_published, date_added, type,
   license`), set `raw:` to point at the original file, and leave `related:` to fill in.
 
@@ -66,7 +66,7 @@ raw file?), then the key takeaways and notable details.
 
 ### 5. Create / update knowledge pages (one pass)
 Touch the pages this source affects (typically a handful, up to ~10–15). For each:
-- Use the matching template in `wiki/<category>/_template.md`.
+- Use the matching skeleton in [`design/templates/`](../../../design/templates/) (`entity.md`, `concept.md`, `comparison.md`, `synthesis.md`).
 - Give it a `> [!summary]` callout and current `status` (stub|draft|stable) and
   `confidence` (low|medium|high).
 - Cite every claim inline with `[src-XXXX]`. If a claim can't be sourced, write

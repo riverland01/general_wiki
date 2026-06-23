@@ -21,7 +21,8 @@ hunting for stale duplicates — there are none to hunt.
 |---------|----------------|
 | Core idea / philosophy | [`../AGENTS.md`](../AGENTS.md) → "The core idea" |
 | Folder layout (file-by-file tree) | this file → "Folder layout" |
-| Page / source / index / log **formats & conventions** | this file |
+| Page / source / index / log **format rules & conventions** | this file |
+| Blank **page/source skeletons** (the copyable templates) | [`templates/`](templates/) |
 | Procedures (ingest / query / lint / redesign) + guardrails | [`operations.md`](operations.md) |
 | Skill-trigger routing for non-auto-activating agents | [`../AGENTS.md`](../AGENTS.md) |
 
@@ -65,15 +66,15 @@ hunting for stale duplicates — there are none to hunt.
 │   ├── update-log/             #   dated archive shards (+ README.md explainer)
 │   ├── raw/                    #   flat, immutable originals (own filenames; + README.md)
 │   ├── sources/                #   one src-XXXX.md per source (digest + raw: pointer)
-│   │   ├── _index.md           #     sources catalog
-│   │   └── _template.md        #     blank source skeleton (copied on ingest)
-│   ├── entities/               #   _index.md + _template.md + entity pages
-│   ├── concepts/               #   _index.md + _template.md + concept pages
-│   ├── comparisons/            #   _index.md + _template.md + comparison pages
-│   └── synthesis/              #   _index.md + _template.md + synthesis pages
+│   │   └── _index.md           #     sources catalog
+│   ├── entities/               #   _index.md + entity pages
+│   ├── concepts/               #   _index.md + concept pages
+│   ├── comparisons/            #   _index.md + comparison pages
+│   └── synthesis/              #   _index.md + synthesis pages
 └── design/                     # DESIGN DOMAIN — how the wiki is built
     ├── structure.md            #   this file — shape & design choices
     ├── operations.md           #   procedures (ingest / query / lint / redesign)
+    ├── templates/              #   blank page/source skeletons (copied on create)
     ├── design-change-log.md    #   design-change log (progressive disclosure)
     └── design-change-log/      #   dated archive shards (+ README.md explainer)
 ```
@@ -82,10 +83,11 @@ _This tree is the **canonical** file-by-file layout. The sketch in
 [`../AGENTS.md`](../AGENTS.md) and the write-target list in the skills orient only —
 they defer here (see → Single source of truth)._
 
-Each category (and `sources/`) carries a `_template.md` skeleton — the blank page
-copied when a new page/source is created. Templates and `_index.md` catalogs are
-**scaffolding, not content**: any frontmatter scan or auto-generated index (see
-*Optional → Auto-generated index*) skips `_index.md` and `_template.md`.
+**Templates live in the design domain** (`design/templates/`), not in `wiki/` — a blank
+skeleton is *shape*, not content. Each `wiki/<category>/` keeps only its `_index.md`
+catalog (a derived view of real content). Both templates and catalogs are **scaffolding,
+not knowledge**: any frontmatter scan or auto-generated index (see *Optional →
+Auto-generated index*) skips `_index.md` files and everything under `design/templates/`.
 
 ---
 
