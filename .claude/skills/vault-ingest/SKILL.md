@@ -54,10 +54,17 @@ wiki/update-log.md             # append a one-line entry per ingest
 Read the source fully. For sources with images, read the **text first**, then view the
 referenced images separately (they don't reliably read inline in one pass).
 
-### 3. Confirm emphasis (default cadence: one at a time)
-Briefly tell the human the key takeaways and confirm what to emphasize before filing.
-For batch/low-supervision ingest, skip the back-and-forth — follow the cadence in
-`operations.md`.
+### 3. Approval gate — report your write-plan and wait (required)
+Before writing **any** entry, report a short plan to the human and **wait for explicit
+approval**:
+- the key takeaways and what you'll emphasize, and
+- the target files this source will touch — the `src-XXXX` source note plus each
+  knowledge page, **each marked create-vs-update with a one-line gist**.
+
+Do not write a digest or page body until they approve. This holds even for
+**batch/low-supervision** ingest — there the human may approve the whole batch's
+write-plan at once, but writes never proceed unapproved (see `operations.md` →
+Guardrails → Approval gate, and the Cadence note).
 
 ### 4. Write the source digest
 In `wiki/sources/src-XXXX.md`, lead with a `> [!summary]` callout written **for the

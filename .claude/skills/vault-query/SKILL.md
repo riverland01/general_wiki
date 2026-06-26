@@ -58,7 +58,11 @@ chart, or a canvas when that serves the user better. Not every answer is a page.
 
 ### 4. File durable answers back (so explorations compound)
 If the answer is durably useful (a comparison, an analysis, a discovered connection),
-**file it back** rather than letting it vanish into chat: create or extend a page under
+**file it back** rather than letting it vanish into chat. Filing back is a write, so the
+**Approval gate** applies (see `operations.md` → Guardrails → Approval gate): first name
+the page you'd create or extend and its one-line gist, and **wait for explicit approval
+before writing**. Giving the user the answer in chat needs no approval; only the file-back
+does. Once approved, create or extend a page under
 `wiki/synthesis/` (skeleton at
 [`design/templates/synthesis.md`](../../../design/templates/synthesis.md)) with a
 `> [!summary]` callout, `status`/`confidence`, citations, and bidirectional backlinks.

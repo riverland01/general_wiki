@@ -33,6 +33,18 @@ they never rewrite it. These rules bind every operation below:
   `design/`.
 - **No silent design edits.** Every change to `design/` is logged in
   [`design-change-log.md`](design-change-log.md). If it isn't logged, it shouldn't happen.
+- **Approval gate — report before you write.** Before any operation **creates or edits a
+  wiki entry** (a `wiki/sources/src-XXXX.md` note, a knowledge page under
+  `wiki/{entities,concepts,comparisons,synthesis}/`, or a filed-back synthesis), first
+  **report a short plan to the human and wait for explicit approval**: name the target
+  file(s), say create-vs-update for each, and give the one-line gist of what goes in.
+  Only write after they approve. Reads, navigation, and answering in chat never need the
+  gate — it is solely about durable writes into `wiki/`. The gate **holds even in batch
+  mode**: approval may be granted once per batch, but it is never silently dropped.
+  (Placing the original into `wiki/raw/`, reserving the `src-XXXX` id, and opening the
+  source-note *shell* — frontmatter + `raw:` pointer, **no digest body yet** — are setup,
+  not content; fold them into the same plan you present. The gated writes are the digest
+  body and the knowledge pages.)
 
 ---
 
@@ -64,8 +76,11 @@ preference is about *agent-driven* work — Ingest, Query, Lint — not that sea
 2. Read it fully. For sources with images, read the **text first**, then view the
    referenced images separately for extra context (LLMs can't reliably read inline
    images in one pass).
-3. **Discuss key takeaways with the human** before filing — confirm what to emphasize.
-4. Fill in the digest body of `wiki/sources/src-XXXX.md` (the reusable summary).
+3. **Approval gate (required).** Report a short plan to the human and **wait for
+   explicit approval before writing anything**: the key takeaways/emphasis, plus the
+   target files this source will touch — the `src-XXXX` note and each page, marked
+   create-vs-update with a one-line gist. Do not fill in any body until they approve.
+4. Once approved, fill in the digest body of `wiki/sources/src-XXXX.md` (the reusable summary).
 5. In one pass, create/update the ~10–15 pages it touches. Keep **backlinks
    bidirectional**: the page's `sources:` ↔ the source's `related:`, and page↔page
    `related:`. Give every new/updated page a `> [!summary]` callout and current
@@ -95,6 +110,9 @@ preference is about *agent-driven* work — Ingest, Query, Lint — not that sea
 > **Cadence:** default to **one source at a time** with the human in the loop
 > (read summaries, check updates, steer emphasis). Switch to **batch ingest** with
 > lighter supervision when volume demands it. Document whichever cadence you settle on.
+> Either way the **Approval gate** (see Guardrails) still applies — in batch mode the
+> human may approve the whole batch's write-plan in one go, but writes never proceed
+> unapproved.
 
 ## 2. Query — answer a question
 1. Navigate the **tiered index** (see [`structure.md`](structure.md) → Index
@@ -106,7 +124,10 @@ preference is about *agent-driven* work — Ingest, Query, Lint — not that sea
 2. Pick the **output format that fits the question** — prose, a comparison table, a
    Marp slide deck, a matplotlib chart, a canvas. Not every answer is a page.
 3. If durably useful, **file the answer back** into `wiki/synthesis/` (or extend a
-   page) so explorations compound instead of vanishing into chat history.
+   page) so explorations compound instead of vanishing into chat history. This is a
+   write, so the **Approval gate** applies: name the page you'd create/extend and its
+   gist, and **wait for approval before writing**. Answering in chat needs no gate; only
+   the file-back does.
 4. Append a summary line to [`../wiki/update-log.md`](../wiki/update-log.md).
 
 ## 3. Lint — health check
